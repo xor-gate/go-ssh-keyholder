@@ -1,0 +1,11 @@
+# Socket path
+#  The path to the SSH agent socket
+socket_path: /var/run/go-keyholder.agent.sock
+
+# Trusted user
+#  The user which is trusted to manage the keyring
+trusted_user:  jerry
+
+# Allowed group
+#  The group which is allowed to use the agent socket
+allowed_group: jerry

@@ -1,0 +1,11 @@
+[Unit]
+Description=Go SSH Keyholder - Securely share ssh agents among groups of users
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/sbin/go-keyholder
+
+[Install]
+WantedBy=multi-user.target
