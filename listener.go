@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"os/user"
+	"strconv"
 
 	"golang.org/x/crypto/ssh/agent"
 	"golang.org/x/sys/unix"
@@ -29,6 +31,27 @@ func connPeerCredentials(conn *net.UnixConn) (uint32, uint32, error) {
 		return 0, 0, err
 	}
 	return creds.Uid, creds.Gid, nil
+}
+
+func userInGroup(uid uint32, gid uint32) (exists bool) {
+	u, err := user.LookupId(strconv.FormatUint(uint64(uid), 10))
+	if err != nil {
+		return
+	}
+
+	g, err := u.GroupIds()
+	if err != nil {
+		return
+	}
+
+	for _, element := range g {
+		if element == strconv.FormatUint(uint64(gid), 10) {
+			exists = true
+			return
+		}
+	}
+	exists = false
+	return
 }
 
 func NewListener(cfg *Config) (*Listener, error) {
@@ -90,14 +113,14 @@ func (l *Listener) serveClient(c net.Conn) {
 		return
 	}
 
-	uid, gid, err := connPeerCredentials(uc)
+	uid, _, err := connPeerCredentials(uc)
 	if err != nil {
 		return
 	}
 
 	if uid == l.cfg.TrustedUserId {
 		agent.ServeAgent(l.kr, c)
-	} else if gid == l.cfg.AllowedGroupId {
+	} else if userInGroup(uid, l.cfg.AllowedGroupId) {
 		agent.ServeAgent(&SignOnlyKeyring{Agent: l.kr}, c)
 	} else {
 		agent.ServeAgent(&NoopKeyring{}, c)
