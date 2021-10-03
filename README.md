@@ -8,6 +8,15 @@ The go-ssh-keyholder only works under linux due to Unix Socket `SO_PEERCRED` usa
 
 `go get github.com/xor-gate/go-ssh-keyholder`
 
+# Usage
+
+```
+go-ssh-keyholder -config /path/to/go-keyholder.yml
+export SSH_AUTH_SOCK=/path/to/go-keyholder.agent.sock
+ssh-add
+ssh <host>
+```
+
 # Documentation
 
 * https://blog.wikimedia.org/2017/03/22/keyholder/

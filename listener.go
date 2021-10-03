@@ -118,7 +118,7 @@ func (l *Listener) serveClient(c net.Conn) {
 	}
 
 	if uid == l.cfg.TrustedUserId {
-		agent.ServeAgent(l.kr, c)
+		agent.ServeAgent(&TrustedKeyring{Agent: l.kr}, c)
 	} else if userInGroup(uid, l.cfg.AllowedGroupId) {
 		agent.ServeAgent(&SignOnlyKeyring{Agent: l.kr}, c)
 	} else {
