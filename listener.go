@@ -8,7 +8,6 @@ import (
 	"strconv"
 
 	"golang.org/x/crypto/ssh/agent"
-	"golang.org/x/sys/unix"
 )
 
 var ErrListenerSocketPathIsNotAUnixSocket = fmt.Errorf("listener socket path is not unix socket")
@@ -24,13 +23,13 @@ func connPeerCredentials(conn *net.UnixConn) (uint32, uint32, error) {
 	if err != nil {
 		return 0, 0, err
 	}
-	creds, err := unix.GetsockoptUcred(int(f.Fd()), unix.SOL_SOCKET, unix.SO_PEERCRED)
+	uid, gid, err := listenerGetSocketUidGid(int(f.Fd()))
 	f.Close()
 
 	if err != nil {
 		return 0, 0, err
 	}
-	return creds.Uid, creds.Gid, nil
+	return uid, gid, nil
 }
 
 func userInGroup(uid uint32, gid uint32) (exists bool) {

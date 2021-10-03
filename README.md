@@ -14,6 +14,10 @@ The go-ssh-keyholder only works under linux due to Unix Socket `SO_PEERCRED` usa
 * https://github.com/wikimedia/keyholder
 * http://www.unixwiz.net/techtips/ssh-agent-forwarding.html
 
+# See also
+
+* https://github.com/cptpcrd/unix_cred
+
 # License
 
 [MIT](LICENSE)
