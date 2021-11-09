@@ -4,7 +4,7 @@ Go implementation of the MediaWiki KeyHolder for securely sharing ssh agents amo
 
 # Installation
 
-The go-ssh-keyholder only works under linux due to Unix Socket `SO_PEERCRED` usage for reading the Uid and Gid of the client connection.
+The go-ssh-keyholder only works under UNIX-like OS'es. Currently supported are Linux `SO_PEERCRED` and FreeBSD `LOCAL_PEERCRED` for reading the Uid and Gid of the unix socket ssh agent client connection.
 
 `go get github.com/xor-gate/go-ssh-keyholder`
 
