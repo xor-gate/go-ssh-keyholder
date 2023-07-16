@@ -1,6 +1,6 @@
 # Socket path
 #  The path to the SSH agent socket
-socket_path: go-keyholder.agent.sock
+socket_path: go-ssh-keyholder.agent.sock
 
 # Trusted user
 #  The user which is trusted to manage the keyring
