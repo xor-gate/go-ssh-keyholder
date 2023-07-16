@@ -1,6 +1,6 @@
 # go-ssh-keyholder
 
-Go implementation of the MediaWiki KeyHolder for securely sharing ssh agents among groups of users.
+Go implementation of the MediaWiki KeyHolder for securely sharing ssh a secured and system wide SSH agent among groups of users.
 
 # Installation
 
