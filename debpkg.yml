@@ -1,10 +1,10 @@
 # github.com/xor-gate/debpkg specfile
-name: go-keyholder
+name: go-ssh-keyholder
 version: 0.1.0-beta1
 architecture: amd64
 maintainer: Jerry Jacobs
 maintainer_email: jerry.jacobs@xor-gate.org
-homepage: https://github.com/xor-gate/go-keyholder
+homepage: https://github.com/xor-gate/go-ssh-keyholder
 
 description:
   short: Securely share ssh agents among groups of users
@@ -12,14 +12,14 @@ description:
     Securely share ssh agents among groups of users.
 
 files:
-  - file: go-keyholder
-    dest: {{.SBINDIR}}/go-keyholder
-  - file: go-keyholder.service
-    dest: /lib/systemd/system/go-keyholder.service
+  - file: go-ssh-keyholder
+    dest: {{.SBINDIR}}/go-ssh-keyholder
+  - file: go-ssh-keyholder.service
+    dest: /lib/systemd/system/go-ssh-keyholder.service
     conffile: true
-  - file: etc/go-keyholder.yml
-    dest: /etc/go-keyholder.yml
+  - file: etc/go-ssh-keyholder.yml
+    dest: /etc/go-ssh-keyholder.yml
     conffile: true
-  - file: etc/profile.d/go-keyholder.sh
-    dest: /etc/profile.d/go-keyholder.sh
+  - file: etc/profile.d/go-ssh-keyholder.sh
+    dest: /etc/profile.d/go-ssh-keyholder.sh
     conffile: true
